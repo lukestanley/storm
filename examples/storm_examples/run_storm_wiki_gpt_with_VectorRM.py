@@ -56,10 +56,10 @@ def main(args):
     )
     # If you are using Azure service, make sure the model name matches your own deployed model name.
     # The default name here is only used for demonstration and may not match your case.
-    gpt_35_model_name = (
-        "gpt-3.5-turbo" if os.getenv("OPENAI_API_TYPE") == "openai" else "gpt-35-turbo"
+    gpt_4o_mini_model_name = (
+        "gpt-4o-mini" if os.getenv("OPENAI_API_TYPE") == "openai" else "gpt-4o-turbo"
     )
-    gpt_4_model_name = "gpt-4o"
+    gpt_4o_model_name = "gpt-4o"
     if os.getenv("OPENAI_API_TYPE") == "azure":
         openai_kwargs["api_base"] = os.getenv("AZURE_API_BASE")
         openai_kwargs["api_version"] = os.getenv("AZURE_API_VERSION")
@@ -70,15 +70,15 @@ def main(args):
     # for outline_gen_lm which is responsible for organizing the collected information, and article_gen_lm
     # which is responsible for generating sections with citations.
     conv_simulator_lm = ModelClass(
-        model=gpt_35_model_name, max_tokens=500, **openai_kwargs
+        model=gpt_4o_mini_model_name, max_tokens=500, **openai_kwargs
     )
     question_asker_lm = ModelClass(
-        model=gpt_35_model_name, max_tokens=500, **openai_kwargs
+        model=gpt_4o_mini_model_name, max_tokens=500, **openai_kwargs
     )
-    outline_gen_lm = ModelClass(model=gpt_4_model_name, max_tokens=400, **openai_kwargs)
-    article_gen_lm = ModelClass(model=gpt_4_model_name, max_tokens=700, **openai_kwargs)
+    outline_gen_lm = ModelClass(model=gpt_4o_model_name, max_tokens=400, **openai_kwargs)
+    article_gen_lm = ModelClass(model=gpt_4o_model_name, max_tokens=700, **openai_kwargs)
     article_polish_lm = ModelClass(
-        model=gpt_4_model_name, max_tokens=4000, **openai_kwargs
+        model=gpt_4o_model_name, max_tokens=4000, **openai_kwargs
     )
 
     engine_lm_configs.set_conv_simulator_lm(conv_simulator_lm)
