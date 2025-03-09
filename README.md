@@ -120,13 +120,13 @@ openai_kwargs = {
 # STORM is a LM system so different components can be powered by different models to reach a good balance between cost and quality.
 # For a good practice, choose a cheaper/faster model for `conv_simulator_lm` which is used to split queries, synthesize answers in the conversation.
 # Choose a more powerful model for `article_gen_lm` to generate verifiable text with citations.
-gpt_35 = LitellmModel(model='gpt-3.5-turbo', max_tokens=500, **openai_kwargs)
-gpt_4 = LitellmModel(model='gpt-4o', max_tokens=3000, **openai_kwargs)
-lm_configs.set_conv_simulator_lm(gpt_35)
-lm_configs.set_question_asker_lm(gpt_35)
-lm_configs.set_outline_gen_lm(gpt_4)
-lm_configs.set_article_gen_lm(gpt_4)
-lm_configs.set_article_polish_lm(gpt_4)
+gpt_4o_mini = LitellmModel(model='gpt-4o-mini', max_tokens=500, **openai_kwargs)
+gpt_4o = LitellmModel(model='gpt-4o', max_tokens=3000, **openai_kwargs)
+lm_configs.set_conv_simulator_lm(gpt_4o_mini)
+lm_configs.set_question_asker_lm(gpt_4o_mini)
+lm_configs.set_outline_gen_lm(gpt_4o)
+lm_configs.set_article_gen_lm(gpt_4o)
+lm_configs.set_article_polish_lm(gpt_4o)
 # Check out the STORMWikiRunnerArguments class for more configurations.
 engine_args = STORMWikiRunnerArguments(...)
 rm = YouRM(ydc_api_key=os.getenv('YDC_API_KEY'), k=engine_args.search_top_k)
